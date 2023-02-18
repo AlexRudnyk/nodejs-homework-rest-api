@@ -10,6 +10,7 @@ router.post("/signup", validation(joiSchema), ctrlWrapper(ctrl.signUp));
 router.post("/login", validation(joiSchema), ctrlWrapper(ctrl.login));
 router.get("/current", auth, ctrlWrapper(ctrl.getCurrent));
 router.get("/logout", auth, ctrlWrapper(ctrl.logout));
+router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verifyEmail));
 router.patch(
   "/",
   auth,

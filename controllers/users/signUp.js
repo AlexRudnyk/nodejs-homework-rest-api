@@ -1,6 +1,8 @@
 const { User } = require("../../models/user");
 const { Conflict } = require("http-errors");
 const gravatar = require("gravatar");
+const { v4 } = require("uuid");
+const { sendEmail } = require("../../helpers");
 
 const signUp = async (req, res) => {
   const { email, password } = req.body;
@@ -9,14 +11,25 @@ const signUp = async (req, res) => {
     throw new Conflict(`${email} in use`);
   }
   const avatarURL = gravatar.url(email);
-  const newUser = new User({ email, avatarURL });
+  const verificationToken = v4();
+  const newUser = new User({ email, avatarURL, verificationToken });
   newUser.setPassword(password);
-  newUser.save();
+  await newUser.save();
+
+  const mail = {
+    to: email,
+    subject: "Email confirmation",
+    html: `<a target="_blank" href="http://localhost:3000/api/users/verify/${verificationToken}">Please confirm your email</a>`,
+  };
+
+  await sendEmail(mail);
+
   res.status(201).json({
     user: {
       email,
       subscription: "starter",
       avatarURL,
+      verificationToken,
     },
   });
 };
