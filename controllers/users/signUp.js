@@ -19,7 +19,7 @@ const signUp = async (req, res) => {
   const mail = {
     to: email,
     subject: "Email confirmation",
-    html: `<a target="_blank" href="http://localhost:3000/api/users/verify/${verificationToken}">Please confirm your email</a>`,
+    html: `<a target="_blank" href="https://nodejs-homework-rest-api-sandy.vercel.app/api/users/verify/${verificationToken}">Please confirm your email</a>`,
   };
 
   await sendEmail(mail);
