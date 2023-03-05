@@ -20,10 +20,8 @@ const login = async (req, res) => {
   const { subscription } = user;
   res.json({
     token,
-    user: {
-      email,
-      subscription,
-    },
+    email,
+    subscription,
   });
 };
 
