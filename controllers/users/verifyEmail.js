@@ -18,7 +18,7 @@ const verifyEmail = async (req, res) => {
       <meta charset="utf-8" />
   </head>
   <body>
-      <h1>Верификация успешна</h1>
+      <h1>Verification successful</h1>
       <a href="http://localhost:3000/Phonebook-frontend-new/login">Go to Login page</a>
   </body>
   <html>`);
