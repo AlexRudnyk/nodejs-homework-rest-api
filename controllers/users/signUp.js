@@ -16,6 +16,8 @@ const signUp = async (req, res) => {
   newUser.setPassword(password);
   await newUser.save();
 
+  // Email confirmation
+
   const mail = {
     to: email,
     subject: "Email confirmation",
