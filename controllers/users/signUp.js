@@ -5,14 +5,14 @@ const { v4 } = require("uuid");
 const { sendEmail } = require("../../helpers");
 
 const signUp = async (req, res) => {
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
   const user = await User.findOne({ email });
   if (user) {
     throw new Conflict(`${email} in use`);
   }
   const avatarURL = gravatar.url(email);
   const verificationToken = v4();
-  const newUser = new User({ email, avatarURL, verificationToken });
+  const newUser = new User({ name, email, avatarURL, verificationToken });
   newUser.setPassword(password);
   await newUser.save();
 
@@ -28,6 +28,7 @@ const signUp = async (req, res) => {
   await sendEmail(mail);
 
   res.status(201).json({
+    name,
     email,
     subscription: "starter",
     avatarURL,

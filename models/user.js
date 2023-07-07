@@ -4,6 +4,10 @@ const bcrypt = require("bcryptjs");
 
 const userSchema = Schema(
   {
+    name: {
+      type: String,
+      // required: [true, "Name is required"],
+    },
     password: {
       type: String,
       required: [true, "Password is required"],
@@ -50,6 +54,7 @@ userSchema.methods.comparePassword = function (password) {
 };
 
 const joiSchema = Joi.object({
+  name: Joi.string(),
   password: Joi.string().required(),
   email: Joi.string().required(),
 });
