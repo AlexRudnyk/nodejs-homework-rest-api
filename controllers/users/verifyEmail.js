@@ -19,7 +19,7 @@ const verifyEmail = async (req, res) => {
   </head>
   <body>
       <h1>Verification successful</h1>
-      <a href="http://localhost:3000/Phonebook-frontend-new/login">Go to Login page</a>
+      <a href="https://alexrudnyk.github.io/Phonebook-front-back/login">Go to Login page</a>
   </body>
   <html>`);
 };
